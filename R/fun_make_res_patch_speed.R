@@ -131,7 +131,7 @@ atl_res_patch_speed <- function(data,
 
       # merge points if not spatially independent
       # compare distance from previous point to buffer_radius
-      data <- data[, patch := cumsum(spat_diff > (2 * buffer_radius) |
+      data <- data[, patch := cumsum(speed > max_speed | spat_diff > lim_spat_indep |
         time_diff > lim_time_indep)]
 
       # count fixes and patch and remove small patches
