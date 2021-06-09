@@ -28,10 +28,8 @@
 #'  \code{y}, and a temporal coordinate, \code{time}. The names of columns
 #'  specifying these can be passed as arguments below. The column \code{id}
 #'  indicating animal id is \emph{required}.
-#' @param buffer_radius A numeric value specifying the radius of the buffer to
-#' be considered around each coordinate point. May be thought of as the distance
-#'  that an individual can access, assess, or otherwise cover when at a discrete
-#'   point in space.
+#' @param max_speed A numeric value specifying the maximum speed (m/s) between two 
+#' coordinates that would be considered non-transitory 
 #' @param lim_spat_indep A numeric value of distance in metres of the spatial
 #' distance between two patches for them to the considered independent.
 #' @param lim_time_indep A numeric value of time in minutes of the time
@@ -65,7 +63,7 @@
 #' @export
 #'
 atl_res_patch_speed <- function(data,
-                          speed = 10,
+                          max_speed = 10,
                           lim_spat_indep = 100,
                           lim_time_indep = 30,
                           min_fixes = 3,
@@ -116,14 +114,16 @@ atl_res_patch_speed <- function(data,
   )
   tryCatch(
     expr = {
+      
       # identify spatial overlap
-      # assign spat diff columns
+      # assign spat & time diff and speed columns
       data[, `:=`(
         spat_diff = atlastools::atl_simple_dist(
           data = data,
           x = "x", y = "y"
         ),
-        time_diff = c(Inf, as.numeric(diff(time)))
+        time_diff = c(Inf, as.numeric(diff(time))),
+        speed = spat_diff/time_diff
       )]
 
       # first spatial difference is infinity for calculation purposes
