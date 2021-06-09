@@ -64,8 +64,8 @@
 #' }
 #' @export
 #'
-atl_res_patch <- function(data,
-                          buffer_radius = 10,
+atl_res_patch_speed <- function(data,
+                          speed = 10,
                           lim_spat_indep = 100,
                           lim_time_indep = 30,
                           min_fixes = 3,
