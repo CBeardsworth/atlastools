@@ -86,7 +86,7 @@ atl_res_patch_speed <- function(data,
   )
 
   assertthat::assert_that(min(c(
-    buffer_radius, lim_spat_indep,
+    max_speed, lim_spat_indep,
     lim_time_indep, min_fixes
   )) > 0,
   msg = "atl_make_res_patch: function needs \\
@@ -269,7 +269,7 @@ atl_res_patch_speed <- function(data,
       # true spatial metrics
       data[, polygons := lapply(patchdata, function(df) {
         p1 <- sf::st_as_sf(df, coords = c("x", "y"))
-        p2 <- sf::st_buffer(p1, dist = buffer_radius)
+        p2 <- sf::st_buffer(p1, dist = lim_spat_indep)
         p2 <- sf::st_union(p2)
         return(p2)
       })]
