@@ -214,6 +214,7 @@ atl_res_patch_speed <- function(data,
         # get mandatory metrics
         dt2 <- dt[, unlist(lapply(.SD, function(d) {
           list(
+            mean = as.double(mean(d)),
             median = as.double(stats::median(d)),
             start = as.double(data.table::first(d)),
             end = as.double(data.table::last(d))
