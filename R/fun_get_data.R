@@ -9,7 +9,7 @@
 #' should be retrieved.
 #' @param tracking_time_end Character time representing the end point
 #' corresponding to the above start point.
-#' @param tz Timezone of tracking_time_start and tracking_time_end. Must be a valid timezone for the as.POSIXct function. 
+#' @param timezone Timezone of tracking_time_start and tracking_time_end. Must be a valid timezone for the as.POSIXct function. 
 #' @param database The database name on the host server. Defaults to
 #' \code{db} for unknown reasons.
 #' @param host The server address on which the data are stored.
@@ -24,7 +24,7 @@
 atl_get_data <- function(tag,
                          tracking_time_start,
                          tracking_time_end,
-                         tz = "CET",
+                         timezone = "CET",
                          database = "some_database",
                          host = "abtdb1.nioz.nl",
                          username = "someuser",
@@ -58,8 +58,8 @@ atl_get_data <- function(tag,
   })
   
   # convert to POSIXct format
-  tracking_time_start <- as.POSIXct(tracking_time_start, tz = tz)
-  tracking_time_end <- as.POSIXct(tracking_time_end, tz = tz)
+  tracking_time_start <- as.POSIXct(tracking_time_start, tz = timezone)
+  tracking_time_end <- as.POSIXct(tracking_time_end, tz = timezone)
   
   # convert time to UTC (which is the database format)
   attributes(tracking_time_start)$tzone <- "UTC"
