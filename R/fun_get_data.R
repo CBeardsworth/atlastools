@@ -46,7 +46,7 @@ atl_get_data <- function(tag,
                                            rather {nchar(tag)} digits")
   )
   #check timezone
-  assertthat::assert_that(is.character(tz),
+  assertthat::assert_that(is.character(timezone),
                           msg = "timezone provided must be numeric or character"
   )
   
