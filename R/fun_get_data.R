@@ -23,6 +23,7 @@
 atl_get_data <- function(tag,
                          tracking_time_start,
                          tracking_time_end,
+                         tz = "CET",
                          database = "some_database",
                          host = "abtdb1.nioz.nl",
                          username = "someuser",
@@ -43,6 +44,10 @@ atl_get_data <- function(tag,
                           msg = glue::glue("tag is not 11 digits, \\
                                            rather {nchar(tag)} digits")
   )
+  #check timezone
+  assertthat::assert_that(is.character(tz),
+                          msg = "timezone provided must be numeric or character"
+  )
   
   db_params <- c(host, username, password)
   purrr::walk(db_params, function(this_param) {
@@ -52,8 +57,8 @@ atl_get_data <- function(tag,
   })
   
   # convert to POSIXct format
-  tracking_time_start <- as.POSIXct(tracking_time_start, tz = "CET")
-  tracking_time_end <- as.POSIXct(tracking_time_end, tz = "CET")
+  tracking_time_start <- as.POSIXct(tracking_time_start, tz = tz)
+  tracking_time_end <- as.POSIXct(tracking_time_end, tz = tz)
   
   # convert time to UTC (which is the database format)
   attributes(tracking_time_start)$tzone <- "UTC"
