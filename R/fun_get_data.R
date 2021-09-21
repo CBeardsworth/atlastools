@@ -9,6 +9,7 @@
 #' should be retrieved.
 #' @param tracking_time_end Character time representing the end point
 #' corresponding to the above start point.
+#' @param tz Timezone of tracking_time_start and tracking_time_end. Must be a valid timezone for the as.POSIXct function. 
 #' @param database The database name on the host server. Defaults to
 #' \code{db} for unknown reasons.
 #' @param host The server address on which the data are stored.
