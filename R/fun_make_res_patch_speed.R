@@ -22,7 +22,7 @@
 #' \code{summary_variables} and \code{summary_functions} arguments, respectively
 #' .
 #'
-#' @author Pratik R. Gupte
+#' @author Pratik R. Gupte & Christine E. Beardsworth
 #' @param data A dataframe of values of any class that is or extends data.frame.
 #'  The dataframe must contain at least two spatial coordinates, \code{x} and
 #'  \code{y}, and a temporal coordinate, \code{time}. The names of columns
@@ -69,7 +69,7 @@ atl_res_patch_speed <- function(data,
                                 min_fixes = 3,
                                 summary_variables = c(),
                                 summary_functions = c()) {
-  area <- disp_in_patch <- NULL
+  disp_in_patch <- NULL
   dist_bw_patch <- dist_in_patch <- duration <- NULL
   id <- newpatch <- nfixes <- patch <- NULL
   patchdata <- polygons <- spat_diff <- NULL
